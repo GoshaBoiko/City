@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import {BrowserRouter} from 'react-router-dom';
 import {offersData} from './mocks/offers-data';
+import { HelmetProvider } from 'react-helmet-async';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -10,8 +11,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App offers={offersData}/>
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <App offers={offersData}/>
+      </BrowserRouter>
+    </HelmetProvider>
   </React.StrictMode>
 );

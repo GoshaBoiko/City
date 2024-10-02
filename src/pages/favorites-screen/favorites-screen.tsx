@@ -1,9 +1,13 @@
 import HeaderMain from '../../components/header-main/header-main.tsx';
 import FavoritesFooter from '../../components/favorites-footer/favorites-footer.tsx';
+import {Helmet} from "react-helmet-async";
 
 export default function FavoritesScreen(): JSX.Element {
   return (
     <div className="page">
+      <Helmet>
+        <title>6 cities: Favorites</title>
+      </Helmet>
       <HeaderMain/>
 
       <main className="page__main page__main--favorites">

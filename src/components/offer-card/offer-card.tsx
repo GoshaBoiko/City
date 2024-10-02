@@ -1,21 +1,33 @@
-import {OfferPreviewType} from '../../types/offer-preview.type.ts';
+import {OfferPreviewType} from '../../types/offer-preview.type';
+import {calculationRating} from '../../utils/utils';
+import {useState} from 'react';
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../types/app-route.enum.ts';
 
 type OfferCardProps = {
   offer: OfferPreviewType;
 }
 
 export default function OfferCard({offer}: OfferCardProps): JSX.Element {
-  const {previewImage, title, price, type, isPremium} = offer;
+  const {previewImage, title, price, type, isPremium, rating, id} = offer;
+  const [isHovered, setIsHovered] = useState(false);
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    console.log(id, isHovered);
+  };
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
   return (
-    <article className="cities__card place-card">
+    <article className="cities__card place-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>)}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to={AppRoute.Offer}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt={title}/>
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -32,13 +44,12 @@ export default function OfferCard({offer}: OfferCardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            {/* TODO: расчитать рейтинг */}
-            <span style={{width: '80%'}}></span>
+            <span style={{width: `${calculationRating(rating)}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={AppRoute.Offer}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

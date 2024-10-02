@@ -2,6 +2,7 @@ import HeaderMain from '../../components/header-main/header-main';
 import OfferMap from '../../components/offer-map/offer-map';
 import {OfferPreviewType} from '../../types/offer-preview.type';
 import OffersList from '../../components/offers-list/offers-list';
+import {Helmet} from 'react-helmet-async';
 
 type MainScreenProps = {
   offers: OfferPreviewType[];
@@ -10,6 +11,10 @@ type MainScreenProps = {
 export default function MainScreen({offers}: MainScreenProps) {
   return (
     <div className="page page--gray page--main">
+      <Helmet>
+        <title>6 cities: Main page</title>
+        <meta name="keywords" content="places to stay in Amsterdam or Dusseldorf or Hamburg or Brussels or Cologne or Paris" />
+      </Helmet>
       <HeaderMain/>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
@@ -62,7 +67,7 @@ export default function MainScreen({offers}: MainScreenProps) {
                     <use xlinkHref="#icon-arrow-select"></use>
                   </svg>
                 </span>
-                todo{/* visually-hidden у списка ниже нужно убрать!!!*/}
+                {/* todo visually-hidden у списка ниже нужно убрать!!!*/}
                 <ul className="places__options places__options--custom places__options--opened visually-hidden">
                   <li className="places__option places__option--active" tabIndex={0}>
                     Popular
@@ -78,7 +83,7 @@ export default function MainScreen({offers}: MainScreenProps) {
                   </li>
                 </ul>
               </form>
-              <OffersList offers={offers} />
+              <OffersList offers={offers}/>
             </section>
             <OfferMap/>
           </div>

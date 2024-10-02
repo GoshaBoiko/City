@@ -1,21 +1,21 @@
-import {AppRoute} from '../../types/app-route.enum';
-import {AuthorizationStatus} from '../../types/authorization-status.enum';
-import {React} from 'react';
 import {Navigate} from 'react-router-dom';
 import {checkAuthorizationStatus} from '../../utils/utils';
+import {ReactNode} from 'react';
+import {AUTH_STATUS} from '../../const';
+import {AppRoute} from '../../types/app-route.enum';
+
+export const isAuth = checkAuthorizationStatus(AUTH_STATUS);
 
 type PrivateRouteProps = {
-  restrictedFor: AuthorizationStatus;
-  redirectTo: AppRoute;
-  children: JSX.Element;
+  children: ReactNode;
 }
 
-export default function PrivateRoute({restrictedFor, redirectTo, children}: PrivateRouteProps) {
-  const isAuth = checkAuthorizationStatus(restrictedFor);
 
+export default function PrivateRoute({children}: PrivateRouteProps) {
   return isAuth ? (
     children
   ) : (
-    <Navigate to={redirectTo}/>
+    <Navigate to={AppRoute.Login}/>
   );
 }
+

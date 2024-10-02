@@ -1,9 +1,13 @@
 import HeaderMain from '../../components/header-main/header-main.tsx';
+import {Helmet} from 'react-helmet-async';
 
 export default function LoginScreen(): JSX.Element {
   return (
     <div className="page page--gray page--login">
-      <HeaderMain />
+      <Helmet>
+        <title>6 cities: Login</title>
+      </Helmet>
+      <HeaderMain/>
 
       <main className="page__main page__main--login">
         <div className="page__login-container container">
