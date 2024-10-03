@@ -1,5 +1,5 @@
 import {OfferPreviewType} from '../../types/offer-preview.type';
-import {calculationRating} from '../../utils/utils';
+import {calculationRating, replaceId} from '../../utils/utils';
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../types/app-route.enum.ts';
@@ -11,13 +11,17 @@ type OfferCardProps = {
 export default function OfferCard({offer}: OfferCardProps): JSX.Element {
   const {previewImage, title, price, type, isPremium, rating, id} = offer;
   const [isHovered, setIsHovered] = useState(false);
+  const path = replaceId(id);
+
   const handleMouseEnter = () => {
     setIsHovered(true);
     console.log(id, isHovered);
   };
+
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
+
   return (
     <article className="cities__card place-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       {isPremium && (
@@ -25,7 +29,7 @@ export default function OfferCard({offer}: OfferCardProps): JSX.Element {
           <span>Premium</span>
         </div>)}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={AppRoute.Offer}>
+        <Link to={path}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt={title}/>
         </Link>
       </div>
@@ -49,7 +53,7 @@ export default function OfferCard({offer}: OfferCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={AppRoute.Offer}>{title}</Link>
+          <Link to={path}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

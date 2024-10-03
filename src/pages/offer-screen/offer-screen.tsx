@@ -3,14 +3,22 @@ import OfferGallery from '../../components/offer-gallery/offer-gallery.tsx';
 import OfferContainer from '../../components/offer-container/offer-container.tsx';
 import OfferOther from '../../components/offer-other/offer-other.tsx';
 import {Helmet} from 'react-helmet-async';
-import {OfferType} from '../../types/offer.type.ts';
-import {CommetsDataType} from '../../types/commets-data.type.ts';
+import { OfferPreviewType } from '../../types/offer-preview.type.ts';
+import {  useParams } from 'react-router-dom';
+import NotFoundPage from '../not-found-page/not-found-page.tsx';
 
 type OfferScreenProps = {
-  offers: OfferType;
-  comments: CommetsDataType;
+  offers: OfferPreviewType[];
 }
-export default function OfferScreen({offers, comments}: OfferScreenProps): JSX.Element {
+
+export default function OfferScreen({offers}: OfferScreenProps): JSX.Element {
+  const { id } = useParams();
+  const offer = offers.find((offer) => offer.id === id);
+
+  if (!offer) {
+    return <NotFoundPage />;
+  }
+
   return (
     <div className="page">
       <Helmet>
@@ -21,8 +29,8 @@ export default function OfferScreen({offers, comments}: OfferScreenProps): JSX.E
 
       <main className="page__main page__main--offer">
         <section className="offer">
-          <OfferGallery offer={offers}/>
-          <OfferContainer offer={offers} comments={comments}/>
+          <OfferGallery offer={offer}/>
+          <OfferContainer offer={offer} />
           <section className="offer__map map"></section>
         </section>
         <OfferOther/>

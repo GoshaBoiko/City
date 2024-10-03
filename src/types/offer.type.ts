@@ -14,8 +14,8 @@ export type OfferType = {
   'rating': number;
   'description': string;
   'bedrooms': number;
-  'goods': Array<string>;
+  'goods': string[];
   'host': OfferHostType;
-  'images': Array<string>;
+  'images': string[];
   'maxAdults': number;
 }

@@ -7,4 +7,3 @@ export default function FavoritesFooter(): JSX.Element {
     </footer>
   );
 }
-
